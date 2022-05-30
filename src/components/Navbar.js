@@ -43,12 +43,11 @@ function Navbar() {
       // .then(res => res.json())
       .then((res) => {
         if (res.ok) {
-          console.log(res);
           localStorage.clear();
           alert("로그아웃!");
           history.push("/");
         } else {
-          alert("다시 시도해주세요!");
+          localStorage.clear();
         }
       });
   };
@@ -65,6 +64,8 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <div className="out-red-circle" />
+          <div className="post-here">우체통은 여기!</div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
@@ -95,14 +96,14 @@ function Navbar() {
                   <span>탈퇴하기</span>
                 </a>
               </li>
-              <li className="nav-text-small">
+              {/* <li className="nav-text-small">
                 <a href="/receivedletter">
                   <span>받은 편지 보기</span>
                 </a>
-              </li>
+              </li> */}
               <li className="nav-text-small3">
                 <a href="/mypostbox">
-                  <span>나의 우체통 링크</span>
+                  <span>나의 우체통 열기</span>
                 </a>
               </li>
               <li className="nav-text">

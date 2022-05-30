@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
 // import Navbar from "../../components/Navbar";
 import LogoNameCreatePostBox from "../../components/Txt/LogoNameCreatePostBox";
 import BackBtn from "../../components/Btn/BackBtn";
@@ -9,6 +9,7 @@ import LinkName from "../../components/Txt/LinkName";
 import AlertCopy from "../../components/Alert/AlertCopy";
 import PostboxAfter from "../../components/Img/PostboxAfter";
 import CompleteBtn from "../../components/Btn/CompleteBtn";
+import { RefreshRequest } from "../../components/RefreshRequest";
 
 function CreatePostBoxPage3() {
   const [_alert, setAlert] = useState(<AlertCopy></AlertCopy>);
@@ -26,29 +27,7 @@ function CreatePostBoxPage3() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      if (res.detail === "Given token not valid for any token type") {
-        fetch("https://poppymail.shop/api/token/refresh/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            refresh: refresh,
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            if (res) {
-              console.log(res);
-              if (res.detail === "Token is invalid or expired") {
-                localStorage.clear();
-              } else {
-                localStorage.setItem("access", res.access);
-              }
-            }
-          });
-      }
+      RefreshRequest(res, refresh);
 
       if (res[0]) {
         localStorage.setItem("1st_link_title", res[0].link_title);
@@ -99,26 +78,29 @@ function CreatePostBoxPage3() {
   //   if (error) return <div>에러가 발생했습니다.</div>;
   return (
     <>
-      <S.CreatePostBoxScene>
-        <div className="fullbox">
-          <BackBtn></BackBtn>
-          {/* <Navbar></Navbar> */}
+      <S.NoScrollbarScene>
+        <BackBtn></BackBtn>
+        {/* <Navbar></Navbar> */}
 
-          <LogoNameCreatePostBox></LogoNameCreatePostBox>
+        <LogoNameCreatePostBox></LogoNameCreatePostBox>
 
-          {_alert}
+        {_alert}
 
-          <PostboxAfter></PostboxAfter>
-
-          {}
-
-          <LinkName></LinkName>
-
-          <Link to="/kakaoplus">
-            <CompleteBtn></CompleteBtn>
-          </Link>
+        <div className="create-post-box-ment">
+          우체통 링크는 3일간만<br></br> 활성화되어있어요.
         </div>
-      </S.CreatePostBoxScene>
+        <div className="create-post-box-ment-deco1"></div>
+
+        <PostboxAfter></PostboxAfter>
+
+        {}
+
+        <LinkName></LinkName>
+
+        <Link to="/kakaoplus">
+          <CompleteBtn></CompleteBtn>
+        </Link>
+      </S.NoScrollbarScene>
     </>
   );
 }

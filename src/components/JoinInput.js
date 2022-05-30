@@ -89,6 +89,9 @@ function JoinInput() {
           placeholder="01000000000"
           onChange={processPhone}
         ></input>
+        <div className="phone-comment">
+          <p>*편지 확인을 위해 반드시 유효한 핸드폰 번호를 적어주세요!</p>
+        </div>
       </div>
     </>
   );

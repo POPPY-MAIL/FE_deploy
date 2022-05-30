@@ -1,3 +1,3 @@
-const isLogin = () => !!localStorage.getItem("access");
+const isLogin = () => !!localStorage.getItem("username");
 
 export default isLogin;

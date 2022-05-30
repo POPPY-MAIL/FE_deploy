@@ -35,19 +35,25 @@ function CheckLetter() {
           <div className="to-txt">To.</div>
           <div className="to-underline"></div>
           <div className="to-contents" id="div">
-            {localStorage.getItem("receiver")}
+            {localStorage.getItem("receiver") !== "null"
+              ? localStorage.getItem("receiver")
+              : ""}
           </div>
         </div>
         <div className="letter-element" id="contents-box">
           <div className="contents-contents" id="check">
-            {localStorage.getItem("contents")}
+            {localStorage.getItem("contents") !== "null"
+              ? localStorage.getItem("contents")
+              : ""}
           </div>
         </div>
         <div className="letter-element" id="from-box">
           <div className="from-txt">From.</div>
           <div className="from-underline"></div>
           <div id="div" className="from-contents">
-            {localStorage.getItem("sender")}
+            {localStorage.getItem("sender") !== "null"
+              ? localStorage.getItem("sender")
+              : ""}
           </div>
         </div>
       </div>

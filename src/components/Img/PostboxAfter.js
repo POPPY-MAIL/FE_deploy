@@ -9,7 +9,7 @@ function PostboxAfter() {
       <div className="postboxafter">
         <img src={PostboxAfterImg} alt="postbox"></img>
       </div>
-      <div className="bird-txt">작동 시작!</div>
+      <div className="bird-txt">당장 공유해봐!</div>
       <div className="bird">
         <img src={BirdImg} alt="bird"></img>
       </div>

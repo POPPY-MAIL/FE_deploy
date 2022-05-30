@@ -14,13 +14,9 @@ function Letter() {
     localStorage.setItem("receiver", e.target.value);
   };
 
-  const contentsReg = /^.{0,530}$/;
-
   const processContents = (e) => {
     e.target.style.height = "1px";
     e.target.style.height = 12 + e.target.scrollHeight + "px";
-    if (!contentsReg.test(e.target.value))
-      alert("편지는 530자까지 입력할 수 있습니다.");
     setContents(e.target.value);
     localStorage.setItem("contents", e.target.value);
   };

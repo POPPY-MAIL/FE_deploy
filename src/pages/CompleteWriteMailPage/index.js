@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
 import MetooBtn from "../../components/Btn/MetooBtn";
 import GoHomeBtn from "../../components/Btn/GoHomeBtnWhite";
 import LogoName from "../../components/Txt/LogoName";
-import BackBtn from "../../components/Btn/BackBtn";
+// import BackBtn from "../../components/Btn/BackBtn";
 import Poppyimg from "../../image/completewritemailpoppy.png";
 
 function CompleteWriteMail() {
@@ -13,31 +13,29 @@ function CompleteWriteMail() {
 
   return (
     <>
-      <S.CompleteWriteMailScene>
-        <div className="fullbox">
-          <LogoName></LogoName>
-          <BackBtn></BackBtn>
+      <S.NoScrollbarScene>
+        <LogoName></LogoName>
+        {/* <BackBtn></BackBtn> */}
 
-          <div className="complete-write-mail-ment">
-            {localStorage.getItem("nickname")}님의 우편함에<br></br>편지를
-            넣었습니다!
-          </div>
-
-          <img
-            src={Poppyimg}
-            className="completewritemail-poppy-img"
-            alt="poppy img"
-          />
-
-          <Link to="/">
-            <MetooBtn></MetooBtn>
-          </Link>
-
-          <Link to="/">
-            <GoHomeBtn></GoHomeBtn>
-          </Link>
+        <div className="complete-write-mail-ment">
+          {localStorage.getItem("nickname")}님의 우편함에<br></br>편지를
+          넣었습니다!
         </div>
-      </S.CompleteWriteMailScene>
+
+        <img
+          src={Poppyimg}
+          className="completewritemail-poppy-img"
+          alt="poppy img"
+        />
+
+        <Link to="/">
+          <MetooBtn></MetooBtn>
+        </Link>
+
+        <Link to="/">
+          <GoHomeBtn></GoHomeBtn>
+        </Link>
+      </S.NoScrollbarScene>
     </>
   );
 }

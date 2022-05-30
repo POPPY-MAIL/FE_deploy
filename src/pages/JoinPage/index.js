@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useHistory } from "react-router-dom";
 
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
 import LogoNameJoin from "../../components/Txt/LogoNameJoin";
 import BackBtn from "../../components/Btn/BackBtn";
 import JoinMent from "../../components/Txt/JoinMent";
@@ -33,14 +33,12 @@ function JoinPage() {
             localStorage.setItem("User_id", res.user_id);
             localStorage.setItem("refresh", res.refresh);
             localStorage.setItem("is_new", res.is_new);
-            localStorage.setItem(
-              "check_mailbox_today",
-              res.check_mailbox_today
-            );
+            localStorage.setItem("username", res.username);
 
             if (res.access) {
               const is_new = localStorage.getItem("is_new");
-              is_new === "true"
+              const username = localStorage.getItem("username");
+              is_new === "true" || username === ""
                 ? history.push("/joininfo")
                 : history.push("/howto");
             }
@@ -54,17 +52,17 @@ function JoinPage() {
 
   return (
     <>
-      <S.JoinScene>
+      <S.NoScrollbarScene>
         <BackBtn></BackBtn>
         <LogoNameJoin></LogoNameJoin>
 
         <JoinMent></JoinMent>
-      </S.JoinScene>
-      <JoinWithKakao></JoinWithKakao>
+        <JoinWithKakao></JoinWithKakao>
 
-      <S.KakaoBtn onClick={KakaoLoginClickHandler}>
-        <img src={KakaobtnImg} className="KakaobtnImg" alt="kakao" />
-      </S.KakaoBtn>
+        <S.KakaoBtn onClick={KakaoLoginClickHandler}>
+          <img src={KakaobtnImg} className="KakaobtnImg" alt="kakao" />
+        </S.KakaoBtn>
+      </S.NoScrollbarScene>
     </>
   );
 }

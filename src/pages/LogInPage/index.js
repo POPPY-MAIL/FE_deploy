@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
 import LogoNameLogin from "../../components/Txt/LogoNameLogin";
 import BackBtn from "../../components/Btn/BackBtn";
 import LoginMent from "../../components/Txt/LoginMent";
@@ -36,7 +36,6 @@ function LogInPage() {
           .then((res) => {
             localStorage.setItem("access", res.user_id);
             if (res.access) {
-              console.log(res);
               alert(res.user_name + "님, poppy mail에 오신 것을 환영합니다!");
               history.push("/howto");
               // window.location.href="/howto";
@@ -63,7 +62,7 @@ function LogInPage() {
 
   return (
     <>
-      <S.LogInScene>
+      <S.NoScrollbarScene>
         <BackBtn></BackBtn>
 
         <LogoNameLogin></LogoNameLogin>
@@ -74,7 +73,7 @@ function LogInPage() {
         <S.KakaoBtn onClick={KakaoLoginClickHandler}>
           <img src={KakaobtnImg} className="KakaobtnImg" alt="kakao" />
         </S.KakaoBtn>
-      </S.LogInScene>
+      </S.NoScrollbarScene>
     </>
   );
 }

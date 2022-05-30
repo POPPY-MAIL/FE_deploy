@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import JoinInfoMent from "../../components/Txt/JoinInfoMent";
 import LogoNameJoin from "../../components/Txt/LogoNameJoin";
 
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
 import JoinInput from "../../components/JoinInput";
 
 export const UserContext = createContext({
@@ -46,7 +46,9 @@ function JoinInfoPage() {
     } else {
       const access = localStorage.getItem("access");
       const User_id = localStorage.getItem("User_id");
-      fetch("https://poppymail.shop/account/" + User_id + "/userInfo", {
+      localStorage.setItem("username", name);
+      history.push("/joincomplete");
+      fetch("https://poppymail.shop/account/" + User_id + "/userInfo/", {
         method: "PATCH",
         headers: {
           Authorization: "Bearer " + access,
@@ -67,13 +69,9 @@ function JoinInfoPage() {
       })
         .then((res) => res.json())
         .then((res) => {
-          history.push("/joincomplete");
           // localStorage.setItem("Kakao_token", res.access_token);
           // const kakao_token = localStorage.getItem("Kakao_token");
           if (res) {
-            console.log(access);
-            console.log(res);
-
             // alert(res.user_name + "님, poppy mail에 오신 것을 환영합니다!");
             // history.push("/joininfo");
           }
@@ -83,7 +81,7 @@ function JoinInfoPage() {
 
   return (
     <UserContext.Provider value={value}>
-      <S.JoinInfoScene>
+      <S.NoScrollbarScene>
         <LogoNameJoin></LogoNameJoin>
         <JoinInfoMent></JoinInfoMent>
 
@@ -93,7 +91,7 @@ function JoinInfoPage() {
         <div className="join-input-complete-btn" onClick={JoinRequest}>
           완료
         </div>
-      </S.JoinInfoScene>
+      </S.NoScrollbarScene>
     </UserContext.Provider>
   );
 }

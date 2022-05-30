@@ -19,6 +19,9 @@ import MyPostboxPage from "./pages/MyPostboxPage";
 import CheckArrivedMailPage from "./pages/CheckArrivedMailPage";
 import WithdrawalPage from "./pages/WithdrawalPage";
 
+import * as S from "./styles/globalstyle";
+import Background from "./image/background.png";
+
 import "./App.css";
 
 import { BrowserRouter, Switch } from "react-router-dom";
@@ -30,8 +33,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <div className="full">
-          <Switch>
-            {/* <Route exact path="/" component={WelcomePage} />
+          <S.SuperDiv id="super">
+            <S.BackgroundImg>
+              <img className="background" src={Background} alt="background" />
+            </S.BackgroundImg>
+            <Switch>
+              {/* <Route exact path="/" component={WelcomePage} />
             <Route exact path="/login" component={LogInPage} />
             <Route exact path="/join" component={JoinPage} />
             <Route exact path="/joininfo" component={JoinInfoPage} />
@@ -77,67 +84,76 @@ function App() {
               component={CheckArrivedMailPage}
             />
             <Route exact path="/withdrawal" component={WithdrawalPage} /> */}
-            <PublicRoute component={WelcomePage} path="/" exact />
-            <PublicRoute restricted component={JoinPage} path="/join" exact />
-            <PublicRoute component={JoinInfoPage} path="/joininfo" exact />
-            <PrivateRoute
-              component={JoinCompletePage}
-              path="/joincomplete"
-              exact
-            />
-            <PublicRoute component={HowToUnlogPage} path="/howtounlog" exact />
-            <PrivateRoute component={HowToPage} path="/howto" exact />
-            <PrivateRoute
-              component={CreatePostBoxPage1}
-              path="/createpostboxstepone"
-              exact
-            />
-            <PrivateRoute
-              component={CreatePostBoxPage2}
-              path="/createpostboxsteptwo"
-              exact
-            />
-            <PrivateRoute
-              component={CreatePostBoxPage3}
-              path="/createpostboxstepthree"
-              exact
-            />
-            <PrivateRoute component={KakaoPlusPage} path="/kakaoplus" exact />
-            <PrivateRoute
-              component={ReceivedLetterPage}
-              path="/receivedletter"
-              exact
-            />
+              <PublicRoute component={WelcomePage} path="/" exact />
+              <PublicRoute restricted component={JoinPage} path="/join" exact />
+              <PublicRoute component={JoinInfoPage} path="/joininfo" exact />
+              <PublicRoute
+                component={JoinCompletePage}
+                path="/joincomplete"
+                exact
+              />
+              <PublicRoute
+                component={HowToUnlogPage}
+                path="/howtounlog"
+                exact
+              />
+              <PrivateRoute component={HowToPage} path="/howto" exact />
+              <PrivateRoute
+                component={CreatePostBoxPage1}
+                path="/createpostboxstepone"
+                exact
+              />
+              <PrivateRoute
+                component={CreatePostBoxPage2}
+                path="/createpostboxsteptwo"
+                exact
+              />
+              <PrivateRoute
+                component={CreatePostBoxPage3}
+                path="/createpostboxstepthree"
+                exact
+              />
+              <PrivateRoute component={KakaoPlusPage} path="/kakaoplus" exact />
+              <PrivateRoute
+                component={ReceivedLetterPage}
+                path="/receivedletter"
+                exact
+              />
 
-            <PublicRoute
-              component={LetterPage}
-              path="/letter/:mailbox_pk/:random_strkey/"
-              exact
-            />
-            <PublicRoute
-              component={WriteMailPage}
-              path="/writemail/:mailbox_pk/:random_strkey/"
-              exact
-            />
-            <PublicRoute
-              component={CheckWriteMailPage}
-              path="/checkwritemail"
-              exact
-            />
-            <PublicRoute
-              component={CompleteWriteMailPage}
-              path="/completewritemail"
-              exact
-            />
+              <PublicRoute
+                component={LetterPage}
+                path="/letter/:mailbox_pk/:random_strkey/"
+                exact
+              />
+              <PublicRoute
+                component={WriteMailPage}
+                path="/writemail/:mailbox_pk/:random_strkey/"
+                exact
+              />
+              <PublicRoute
+                component={CheckWriteMailPage}
+                path="/checkwritemail"
+                exact
+              />
+              <PublicRoute
+                component={CompleteWriteMailPage}
+                path="/completewritemail"
+                exact
+              />
 
-            <PrivateRoute component={MyPostboxPage} path="/mypostbox" exact />
-            <PrivateRoute
-              component={CheckArrivedMailPage}
-              path="/checkarrivedmail/:mailbox_pk/letters/"
-              exact
-            />
-            <PrivateRoute component={WithdrawalPage} path="/withdrawal" exact />
-          </Switch>
+              <PrivateRoute component={MyPostboxPage} path="/mypostbox" exact />
+              <PrivateRoute
+                component={CheckArrivedMailPage}
+                path="/checkarrivedmail/:mailbox_pk/letters/"
+                exact
+              />
+              <PrivateRoute
+                component={WithdrawalPage}
+                path="/withdrawal"
+                exact
+              />
+            </Switch>
+          </S.SuperDiv>
         </div>
       </div>
     </BrowserRouter>

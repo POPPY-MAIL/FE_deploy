@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import * as S from "./styles";
+import * as S from "../../styles/globalstyle";
+
 import LoginBtn from "../../components/Btn/LoginBtn";
 import JoinBtn from "../../components/Btn/JoinBtn";
 import LogoName from "../../components/Txt/LogoName";
 import Poppy from "../../components/Img/Poppy";
 import WelcomeMent from "../../components/Txt/WelcomeMent";
+import { RefreshRequest } from "../../components/RefreshRequest";
 
 function WelcomePage() {
   const is_new = !!localStorage.getItem("is_new");
@@ -14,55 +16,41 @@ function WelcomePage() {
   const refresh = localStorage.getItem("refresh");
   // const history = useHistory();
 
-  fetch("https://poppymail.shop/mailbox/", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + access,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      if (res.detail === "Given token not valid for any token type") {
-        fetch("https://poppymail.shop/api/token/refresh/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            refresh: refresh,
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
-            if (res.detail === "Token is invalid or expired") {
-              localStorage.clear();
-            }
-          });
-      }
+  useEffect(() => {
+    GetAccess();
+  });
 
-      // if (res.detail === "User not found") {
-      //   alert("다시 로그인해주세요!");
-      //   history.push("/");
-      // }
-    });
+  const GetAccess = () => {
+    fetch("https://poppymail.shop/mailbox/", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + access,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) localStorage.clear();
+        else {
+          localStorage.setItem("check_mailbox_today", res.check_mailbox_today);
+          RefreshRequest(res, refresh);
+        }
+      });
+  };
 
   return (
     <>
-      <S.WelcomeScene>
-        <div className="fullbox">
-          <LogoName></LogoName>
-          <Poppy></Poppy>
-          <WelcomeMent></WelcomeMent>
+      <S.NoScrollbarScene>
+        <LogoName></LogoName>
+        <Poppy></Poppy>
+        <WelcomeMent></WelcomeMent>
 
-          <Link to="/howtounlog">
-            <LoginBtn></LoginBtn>
-          </Link>
+        <Link to="/howtounlog">
+          <LoginBtn></LoginBtn>
+        </Link>
 
-          {/* {is_new ? (
+        {/* {is_new ? (
             <Link to="/joininfo">
               <JoinBtn></JoinBtn>
             </Link>
@@ -71,21 +59,20 @@ function WelcomePage() {
               <JoinBtn></JoinBtn>
             </Link>
           )} */}
-          {!access ? (
-            <Link to="/join">
-              <JoinBtn></JoinBtn>
-            </Link>
-          ) : !is_new ? (
-            <Link to="/joininfo">
-              <JoinBtn></JoinBtn>
-            </Link>
-          ) : (
-            <Link to="/howto">
-              <JoinBtn></JoinBtn>
-            </Link>
-          )}
-        </div>
-      </S.WelcomeScene>
+        {!access ? (
+          <Link to="/join">
+            <JoinBtn></JoinBtn>
+          </Link>
+        ) : !is_new ? (
+          <Link to="/joininfo">
+            <JoinBtn></JoinBtn>
+          </Link>
+        ) : (
+          <Link to="/howto">
+            <JoinBtn></JoinBtn>
+          </Link>
+        )}
+      </S.NoScrollbarScene>
     </>
   );
 }
